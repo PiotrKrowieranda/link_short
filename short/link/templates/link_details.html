@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Link Details</h1>
+    <p>Original URL: <a href="{{ link.original_url }}">{{ link.original_url }}</a></p>
+    <p>Shortened URL: <a href="{{ link.shortened_url }}">{{ link.shortened_url }}</a></p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Usuń</button>
+    </form>
+    <a href="{% url 'index' %}">Powrót do strony głównej</a>
+{% endblock %}

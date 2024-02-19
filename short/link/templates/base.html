@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}Tytuł strony{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+<!--    <style>-->
+
+<!--    </style>-->
+</head>
+
+<body>
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    {% block footer %}
+    <footer>
+    <div id="footer">
+        &copy; 2024 ShortLink
+    </div>
+    {% if request.user.is_anonymous %}
+                <a class="tooltip" data-text="aby korzystać ze stony" href="{% url 'login' %}">zaloguj</a>
+            {% else %}
+                <p>Nazwa zalogowanego usera: {{ request.user.username }}</p>
+                <a href="{% url 'logout-url' %}">wyloguj</a>
+            {% endif %}
+
+    </footer>
+    {% endblock %}
+
+
+
+<script src="{% static 'app.js' %}"></script>
+</body>
+</html>
+

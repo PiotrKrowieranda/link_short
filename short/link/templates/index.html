@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Napisz skrócony link</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Skróć</button>
+    </form>
+
+    <h2>Moje linki</h2>
+
+    {% if shortened_links %}
+        <ul>
+            {% for link in shortened_links %}
+                <li>
+                    <a href="{{ link.original_url }}">{{ link.shortened_url }}</a> -
+                    <a href="{% url 'link-details' link_id=link.id %}">Szczegóły</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Brak skróconych linków.</p>
+    {% endif %}
+{% endblock %}
